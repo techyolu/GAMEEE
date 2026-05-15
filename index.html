@@ -11,12 +11,20 @@
       /* Letter Boxed Game - Comprehensive CSS */
 
 :root {
+  --bg-dark: #050816;
+  --bg-panel: rgba(10, 18, 40, 0.82);
+  --panel-border: rgba(255, 255, 255, 0.12);
+  --text-main: #e8f1ff;
+  --text-muted: #a5b2ce;
+  --accent-blue: #00d4ff;
+  --accent-purple: #a855f7;
+  --accent-green: #39ff14;
+  --shadow: 0 30px 80px rgba(0, 0, 0, 0.35);
+  --border-color: rgba(255, 255, 255, 0.12);
   --pink-bg: #FF9EB1;
   --pink-button: #FF7A9E;
   --pink-button-hover: #FF6B93;
   --text-color: #333333;
-  --link-color: #0066cc;
-  --border-color: #e0e0e0;
   --green-score: #0eb16e;
   --blue-selected: #4A86E8;
   --green-used: #34A853;
@@ -34,6 +42,8 @@ body {
   overflow-x: hidden;
   margin: 0;
   padding: 0;
+  background: linear-gradient(180deg, #FFDCE3 0%, #FF9EB1 100%);
+  color: var(--text-main);
 }
 
 #root {
@@ -47,41 +57,53 @@ body {
 
 .main-content {
   display: flex;
-  flex: 1;
-  justify-content: center;
-  background-color: var(--pink-bg);
+  flex-direction: column;
+  width: 100%;
+  min-height: 100vh;
+  padding: 20px 0 60px;
 }
 
 .game-header {
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 999;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 15px 20px;
-  border-bottom: 1px solid var(--border-color);
-  background-color: aliceblue;
+  padding: 20px 40px;
+  width: 100%;
+  background: rgba(255, 158, 177, 0.95);
+  backdrop-filter: blur(18px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 24px 60px rgba(255, 160, 180, 0.25);
 }
 
 .game-title {
   font-size: 20px;
   font-weight: 600;
-  color: var(--text-color);
+  color: var(--text-main);
   margin: 0;
   text-decoration: none;
 }
 
 .header-controls {
   display: flex;
-  gap: 10px;
+  gap: 12px;
+  align-items: center;
 }
 
 .unlimited-btn {
   background-color: white;
-  border: 1px solid var(--border-color);
+  border: 1px solid #e0e0e0;
   padding: 6px 15px;
   border-radius: 4px;
   font-size: 14px;
   cursor: pointer;
   transition: all 0.2s ease;
+  color: var(--text-color);
+  font-weight: 500;
 }
 
 .unlimited-btn:hover {
@@ -377,19 +399,66 @@ body {
 }
 
 .seo-content {
-  max-width: 800px;
-  margin: 20px auto 0;
-  padding: 20px 20px;
-  line-height: 1.6;
+  position: relative;
+  max-width: 1180px;
+  width: min(calc(100% - 80px), 1180px);
+  margin: 40px auto 0;
+  padding: 46px 48px;
   color: var(--text-color);
+  background: rgba(255, 255, 255, 0.98);
+  border-radius: 24px;
+  border: 1px solid rgba(74, 134, 232, 0.12);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.08);
+  overflow: visible;
+  animation: fadeInUp 0.8s ease both;
 }
 
 .seo-content h1, .seo-content h2 {
-  margin-bottom: 20px;
+  margin-bottom: 24px;
+  color: var(--text-color);
+  font-weight: 700;
+  text-align: left;
+  letter-spacing: 0.8px;
 }
 
+.seo-content h1 {
+  text-transform: uppercase;
+}
+
+.seo-content h1 {
+  font-size: clamp(2.2rem, 4vw, 3.2rem);
+  background: linear-gradient(90deg, #4A86E8, #FF7A9E);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.seo-content h2 {
+  font-size: 1.8rem;
+  position: relative;
+  padding-left: 18px;
+  color: var(--text-color);
+}
+
+.seo-content h2::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 10px;
+  width: 6px;
+  height: calc(100% - 20px);
+  border-radius: 999px;
+  background: linear-gradient(180deg, #4A86E8, #FF7A9E);
+}
+
+.seo-content h2:nth-of-type(3n+1)::before { background: linear-gradient(180deg, #4A86E8, #FF7A9E); }
+.seo-content h2:nth-of-type(3n+2)::before { background: linear-gradient(180deg, #FF7A9E, #34A853); }
+.seo-content h2:nth-of-type(3n+3)::before { background: linear-gradient(180deg, #34A853, #4A86E8); }
+
 .seo-content p {
-  margin-bottom: 16px;
+  margin-bottom: 18px;
+  color: #4a4f5c;
+  line-height: 1.75;
 }
 
 .seo-content ul {
@@ -402,16 +471,18 @@ body {
 }
 
 footer {
-    color: var(--text-color);
+    color: rgba(225, 235, 255, 0.72);
     text-align: center;
-    border-top: 1px solid #e1e1e1;
-    padding: 15px 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 20px 20px;
     font-family: 'Poppins', sans-serif;
     font-size: 14px;
+    background: transparent;
+    margin-top: 40px;
 }
 
 footer a {
-  color: var(--text-color);
+  color: var(--accent-blue);
   text-decoration: none;
   margin: 0 10px;
 }
@@ -420,55 +491,70 @@ footer a:hover {
   text-decoration: underline;
 }
 
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 992px) {
+  .game-header {
+    padding: 16px 24px;
+  }
+
+  .seo-content {
+    padding: 32px 28px;
+  }
+}
+
 @media (max-width: 768px) {
-  .tutorial-dialog {
-    width: 95%;
-    padding: 20px;
+  .game-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 14px;
+    padding: 16px 22px;
+  }
+
+  .header-controls {
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .seo-content {
+    margin: 24px 16px 0;
+    padding: 28px 24px;
   }
 }
 
 @media (max-width: 480px) {
-  .game-header {
-    padding: 10px 15px;
-  }
-  
   .game-title {
-    font-size: 18px;
+    font-size: 1.1rem;
   }
-  
+
   .unlimited-btn {
-    padding: 5px 10px;
-    font-size: 12px;
-  }
-  
-  .streak-banner {
-    gap: 20px;
-    padding: 8px 10px;
-  }
-  
-  .streak-value {
-    font-size: 18px;
-  }
-  
-  .game-container {
-    padding: 10px;
-  }
-  
-  .game-message {
-    font-size: 16px;
-  }
-  
-  .current-word {
-    font-size: 24px;
-  }
-  
-  .control-btn {
-    padding: 6px 15px;
+    width: 100%;
+    padding: 12px 0;
     font-size: 13px;
   }
-}
-.main-title{
-  font-size:36px;
+
+  .seo-content {
+    margin: 18px 12px 0;
+    padding: 24px 18px;
+  }
+
+  .seo-content h1 {
+    font-size: 2rem;
+  }
+
+  .seo-content h2 {
+    font-size: 1.4rem;
+  }
 }
 
 .shrinkle-promotion {
