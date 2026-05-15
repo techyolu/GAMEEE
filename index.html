@@ -1,0 +1,566 @@
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/svg+xml" href="www.letterboxedgame.com/favicon.svg">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Letter Boxed Game - Play Unlimited</title>
+    <meta name="description" content="Letter Boxed is a free unlimited online word puzzle game inspired by NYT. Connect letters around a square to form word chains in this Wordle-like brain teaser.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+      <style>
+      /* Letter Boxed Game - Comprehensive CSS */
+
+:root {
+  --pink-bg: #FF9EB1;
+  --pink-button: #FF7A9E;
+  --pink-button-hover: #FF6B93;
+  --text-color: #333333;
+  --link-color: #0066cc;
+  --border-color: #e0e0e0;
+  --green-score: #0eb16e;
+  --blue-selected: #4A86E8;
+  --green-used: #34A853;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+#root {
+  min-height: 500px;
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.main-content {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  background-color: var(--pink-bg);
+}
+
+.game-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  border-bottom: 1px solid var(--border-color);
+  background-color: white;
+}
+
+.game-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text-color);
+  margin: 0;
+  text-decoration: none;
+}
+
+.header-controls {
+  display: flex;
+  gap: 10px;
+}
+
+.unlimited-btn {
+  background-color: white;
+  border: 1px solid var(--border-color);
+  padding: 6px 15px;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.unlimited-btn:hover {
+  background-color: #f5f5f5;
+}
+
+.unlimited-btn.active {
+  background-color: var(--pink-bg);
+  border-color: var(--pink-bg);
+  color: white;
+}
+
+.unlimited-btn.new-game {
+  background-color: var(--blue-selected);
+  border-color: var(--blue-selected);
+  color: white;
+}
+
+.unlimited-btn.new-game:hover {
+  background-color: #3A76D8;
+}
+
+.stats-btn {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.stats-icon {
+  font-size: 16px;
+}
+
+.icon-btn {
+  background-color: white;
+  border: 1px solid var(--border-color);
+  width: 36px;
+  height: 36px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.streak-banner {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  background-color: #F8F9FA;
+  padding: 10px 20px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.streak-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.streak-label {
+  font-size: 12px;
+  color: #666;
+}
+
+.streak-value {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+.completed-banner {
+  background-color: var(--green-used);
+  color: white;
+  padding: 12px 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.completed-time {
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+.score-banner {
+  background-color: var(--green-score);
+  color: white;
+  padding: 15px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.score {
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.score-text {
+  font-size: 16px;
+}
+
+.game-container {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.game-message {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 18px;
+  color: var(--text-color);
+  min-height: 27px;
+}
+
+.unlimited-indicator {
+  font-size: 0.8em;
+  color: var(--pink-bg);
+  font-style: italic;
+}
+
+.current-word {
+  text-align: center;
+  font-size: 28px;
+  font-weight: bold;
+  margin: 15px 0;
+  min-height: 42px;
+  color: var(--blue-selected);
+}
+
+.words-section {
+  margin: 20px 0;
+  text-align: center;
+}
+
+.words-label {
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.words-list {
+  margin-bottom: 10px;
+  color: var(--text-color);
+}
+
+.letters-count {
+  font-size: 14px;
+  color: #666;
+}
+
+.game-controls {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 25px;
+}
+
+.control-btn {
+  padding: 8px 20px;
+  border: none;
+  border-radius: 4px;
+  background-color: #F8F9FA;
+  border: 1px solid #DDD;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+.control-btn:hover {
+  background-color: #EEEEEE;
+}
+
+.control-btn:active {
+  background-color: #E2E2E2;
+}
+
+.control-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.game-board {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  width: 280px;
+  height: 280px;
+}
+
+.loading-container, .app-loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 300px;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.app-loading-container {
+  width: 100%;
+  height: 100%;
+  min-height: 500px;
+}
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid rgba(255, 158, 177, 0.3);
+  border-radius: 50%;
+  border-top: 4px solid var(--pink-bg);
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.tutorial-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.tutorial-dialog {
+  background-color: white;
+  border-radius: 10px;
+  padding: 30px;
+  width: 90%;
+  max-width: 600px;
+  max-height: 80vh;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.close-tutorial {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #666;
+}
+
+.close-tutorial:hover {
+  color: #333;
+}
+
+.tutorial-dialog h2 {
+  color: var(--text-color);
+  margin-bottom: 20px;
+  font-size: 24px;
+}
+
+.help-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: var(--pink-button);
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  border: none;
+  z-index: 100;
+}
+
+.help-button:hover {
+  background-color: var(--pink-button-hover);
+}
+
+.seo-content {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  line-height: 1.6;
+  color: var(--text-color);
+}
+
+.seo-content h1, .seo-content h2 {
+  margin-bottom: 20px;
+}
+
+.seo-content p {
+  margin-bottom: 16px;
+}
+
+.seo-content ul {
+  margin-bottom: 20px;
+  padding-left: 20px;
+}
+
+.seo-content li {
+  margin-bottom: 8px;
+}
+
+footer {
+    color: var(--text-color);
+    text-align: center;
+    border-top: 1px solid #e1e1e1;
+    padding: 15px 20px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+}
+
+footer a {
+  color: var(--text-color);
+  text-decoration: none;
+  margin: 0 10px;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .tutorial-dialog {
+    width: 95%;
+    padding: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .game-header {
+    padding: 10px 15px;
+  }
+  
+  .game-title {
+    font-size: 18px;
+  }
+  
+  .unlimited-btn {
+    padding: 5px 10px;
+    font-size: 12px;
+  }
+  
+  .streak-banner {
+    gap: 20px;
+    padding: 8px 10px;
+  }
+  
+  .streak-value {
+    font-size: 18px;
+  }
+  
+  .game-container {
+    padding: 10px;
+  }
+  
+  .game-message {
+    font-size: 16px;
+  }
+  
+  .current-word {
+    font-size: 24px;
+  }
+  
+  .control-btn {
+    padding: 6px 15px;
+    font-size: 13px;
+  }
+}
+.main-title{
+  font-size:36px;
+}
+
+.shrinkle-promotion {
+  width: 100%;
+  background-color: #f8f9fa;
+  border-top: 1px solid var(--border-color);
+  padding: 15px 20px;
+  text-align: center;
+  font-size: 14px;
+  color: var(--text-color);
+}
+
+.shrinkle-promotion a {
+  color: var(--link-color);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.shrinkle-promotion a:hover {
+  text-decoration: underline;
+}
+    </style>
+
+    <link rel="stylesheet" href="a.pub.network/letterboxedgame-com/cls.css">
+    <script type="module" crossorigin="" src="www.letterboxedgame.com/assets/index-CvgkJ5vK.js"></script>
+    <link rel="stylesheet" crossorigin="" href="www.letterboxedgame.com/assets/index-DdfU8E2y.css">
+  </head>
+  <body>
+
+    <header class="game-header">
+      <a class="game-title" href="#">Letter Boxed</a>
+      <div class="header-controls">
+        <button id="unlimited-btn" class="unlimited-btn">Unlimited</button>
+        <button id="stats-btn" class="unlimited-btn stats-btn">
+          <span class="stats-icon">📊</span> Stats
+        </button>
+      </div>
+    </header>
+    
+    <!-- React app container -->
+    <div id="root"></div>
+    
+    <section class="seo-content">
+      <h1 class="main-title">Letter Boxed Game - Play Unlimited</h1>
+      <p class="main-paragraph">Letter Boxed is a free unlimited online word puzzle game inspired by NYT. Connect letters around a square to form word chains in this Wordle-like brain teaser. Challenge yourself to use all letters with as few words as possible, where each word must start with the last letter of the previous word. Perfect for vocabulary enthusiasts and puzzle lovers looking for a daily mental workout.</p>
+      
+      <h2>How to Play Letter Boxed</h2>
+      
+      <p>The rules of Letterboxed are straightforward but provide a satisfying challenge:</p>
+      
+      <ul>
+        <li><strong>Connect letters to form words</strong> - Create words by connecting letters from around the square.</li>
+        <li><strong>Minimum word length</strong> - Each word must contain at least 3 letters.</li>
+        <li><strong>No consecutive letters from the same side</strong> - You cannot use two letters from the same side consecutively in a word.</li>
+        <li><strong>Chain your words</strong> - The last letter of each word must be the first letter of your next word (e.g., THY → YES → SINCE).</li>
+        <li><strong>Use all letters</strong> - Your goal is to use every letter on the board at least once.</li>
+        <li><strong>Solve efficiently</strong> - Challenge yourself to solve the puzzle using as few words as possible!</li>
+      </ul>
+      
+    </section>
+    
+    <footer>
+      © 2026 Letter Boxed Game | <a href="#" onclick="document.querySelector('.help-button').click(); return false;">How to Play</a>
+    </footer>
+    
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const unlimitedBtn = document.getElementById('unlimited-btn');
+        const statsBtn = document.getElementById('stats-btn');
+        
+        const urlParams = new URLSearchParams(window.location.search);
+        const mode = urlParams.get('mode');
+        
+        if (mode === 'unlimited') {
+          unlimitedBtn.classList.add('active');
+          unlimitedBtn.textContent = 'Daily';
+        }
+        
+        unlimitedBtn.addEventListener('click', function() {
+          if (mode === 'unlimited') {
+            window.location.href = 'index.html';
+          } else {
+            const gameId = Math.floor(Math.random() * 1000000).toString();
+            window.location.href = `index.html?mode=unlimited&gameId=${gameId}`;
+          }
+        });
+        
+        statsBtn.addEventListener('click', function() {
+          const event = new CustomEvent('showStats');
+          window.dispatchEvent(event);
+        });
+      });
+    </script>
+  
+</body></html>
